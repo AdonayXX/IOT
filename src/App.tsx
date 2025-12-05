@@ -1,4 +1,4 @@
-import './app.css'
+import './App.css'
 import { SensorChart } from './components/dualChart'
 import { LDRChart } from './components/ldrChart'
 import { TempeChart } from './components/tempeChart'
