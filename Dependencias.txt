@@ -1,0 +1,53 @@
+# Crear un nuevo proyecto con Vite el punto es para no crear uan carpeta extra
+npm create vite@latest .  
+
+# Instalar las dependencias de Node.js
+npm install // NODE MODULES
+
+# Instalar los íconos de Material-UI junto con sus dependencias
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react // ICONS
+
+# Instalar los componentes de Material-UI
+npm install @mui/material @emotion/react @emotion/styled // COMPONENTES MATERIA
+
+# Instalar Tailwind CSS y su integración con Vite
+npm install tailwindcss @tailwindcss/vite
+
+
+# Instalar React Router DOM
+npm install react-router-dom // ROUTER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Instala dependencia de toast
+npm install react-hot-toast
+
+# Instalar para la fuente Poppins
+npm install @fontsource/poppins
+
+# Instalar Headless UI (aún no utilizado)
+npm install @headlessui/react // AÚN NO UTILIZADO
+
+# instalar para que funciionen los graficos 
+npm install chart.js react-chartjs-2
+
+#para instalar la fuente popins 
+npm install @fontsource/poppins
+
+#para instalar el datatable 
+npm install react-data-table-component
+
+# Instalar axios
+npm i axios
