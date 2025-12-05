@@ -13,12 +13,12 @@ const chartData = Array.from({ length: 9 }, (_, i) => {
 
 export function SensorChart() {
   return (
-    <div className="bg-[#262626] rounded-lg shadow-lg p-6 h-full">
-      <div className="mb-6">
-        <h3 className="text-xl font-bold text-white">Temperatura & Humedad</h3>
+    <div className="bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
+      <div className="mb-3 sm:mb-6">
+        <h3 className="text-base sm:text-xl font-bold text-white">Temperatura & Humedad</h3>
       </div>
       
-      <div className="h-[calc(100%-70px)]">
+      <div className="h-[160px] sm:h-[calc(100%-70px)]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}

@@ -9,9 +9,9 @@ export function LDRChart() {
   const porcentajeLuz = (nivelLuz / 1000) * 100 // Asumiendo max 1000 lux
 
   return (
-    <div className="flex flex-col bg-[#262626] rounded-lg shadow-lg p-6 h-full">
+    <div className="flex flex-col bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
       <div className="pb-2">
-        <h3 className="text-xl font-bold text-white">LDR (Fotorresistencia)</h3>
+        <h3 className="text-base sm:text-xl font-bold text-white">LDR (Fotorresistencia)</h3>
       </div>
       
       <div className="flex-1 flex items-center justify-center">
@@ -21,7 +21,7 @@ export function LDRChart() {
           endAngle={250}
           innerRadius={100}
           outerRadius={75}
-          width={180}
+          width={180} 
           height={180}
         >
           <PolarGrid
