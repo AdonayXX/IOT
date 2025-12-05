@@ -26,19 +26,22 @@ function App() {
  
 return (
   <div className='bg-[#000] min-h-screen w-screen flex flex-col'>
-    <div className='bg-[#262626] w-full flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0'>
-      <div className='flex items-center gap-2 sm:gap-3'>
-        <div className='bg-[#4ade80] p-2 rounded-md'>
-          <Sprout className='w-5 h-5 text-white' />
+     <div className='bg-[#262626] w-full flex items-center justify-between px-4 sm:px-8 py-3'>
+          <div className='flex items-center gap-3'>
+            <div className='bg-[#4ade80] p-2 rounded-md'>
+              <Sprout className='w-5 h-5 text-white' />
+            </div>
+           
+          </div>
+          <span className='text-xs sm:text-sm text-gray-300'>{parsearFecha(date)}</span>
         </div>
-      </div>
-      <span className='text-xs sm:text-sm text-gray-300'>{parsearFecha(date)}</span>
-    </div>
-    <div className='bg-[#262626] w-full flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-8 py-2 sm:py-3 border-t gap-2 sm:gap-0'>
-      <div className='flex items-center gap-2 sm:gap-3'>
-        <h1 className='text-base sm:text-xl font-bold text-white'>Invernadero Esp32</h1>
-      </div>
-    </div>
+        <div className='bg-[#262626] w-full flex items-center justify-between px-4 sm:px-8 py-3 border-t'>
+          <div className='flex items-center gap-3'>
+           
+            <h1 className='text-lg sm:text-xl font-bold text-white'>Invernadero Esp32</h1>
+          </div>
+          
+        </div>
     <div className="p-2 sm:p-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full mb-3 sm:mb-4">
         <div className="h-[220px] sm:h-[340px]">
