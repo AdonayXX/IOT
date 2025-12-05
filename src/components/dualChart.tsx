@@ -1,0 +1,78 @@
+import { CartesianGrid, Line, LineChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts"
+
+const chartData = Array.from({ length: 9 }, (_, i) => {
+  const hour = 12 + Math.floor(i / 4);
+  const minute = (i % 4) * 15;
+  const time = `${hour > 12 ? hour - 12 : hour}:${minute.toString().padStart(2, '0')}`;
+  return {
+    time,
+    temperatura: Math.floor(Math.random() * 70) + 15, // 15 - 85
+    humedad: Math.floor(Math.random() * 41) + 60      // 60 - 100
+  };
+});
+
+export function SensorChart() {
+  return (
+    <div className="bg-[#262626] rounded-lg shadow-lg p-6 h-full">
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-white">Temperatura & Humedad</h3>
+      </div>
+      
+      <div className="h-[calc(100%-70px)]">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={chartData}
+            margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#3a3a3a" vertical={false} />
+            <XAxis 
+              dataKey="time" 
+              stroke="#9ca3af"
+              style={{ fontSize: '12px' }}
+              tickLine={false}
+              axisLine={{ stroke: '#3a3a3a' }}
+            />
+            <YAxis 
+              stroke="#9ca3af"
+              style={{ fontSize: '12px' }}
+              domain={[0, 100]}
+              ticks={[0, 20, 40, 60, 80]}
+              tickLine={false}
+              axisLine={{ stroke: '#3a3a3a' }}
+            />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#1f1f1f', 
+                border: '1px solid #3a3a3a',
+                borderRadius: '8px',
+                color: '#fff'
+              }}
+            />
+            <Legend 
+              wrapperStyle={{
+                paddingTop: '20px'
+              }}
+              iconType="circle"
+            />
+            <Line
+              dataKey="temperatura"
+              type="monotone"
+              stroke="#4ade80"
+              strokeWidth={3}
+              dot={false}
+              name="Temperatura"
+            />
+            <Line
+              dataKey="humedad"
+              type="monotone"
+              stroke="#ffffff"
+              strokeWidth={3}
+              dot={false}
+              name="Humedad"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
