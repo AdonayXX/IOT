@@ -23,57 +23,51 @@ function App() {
         };
         return fecha.toLocaleDateString('en-ES', opciones);
     }
-  return (
-    <div className='bg-[#000] min-h-screen w-screen flex flex-col'>
-      <div className='bg-[#262626] w-full flex items-center justify-between px-8 py-3'>
-        <div className='flex items-center gap-3'>
-          <div className='bg-[#4ade80] p-2 rounded-md'>
-            <Sprout className='w-5 h-5 text-white' />
-          </div>
-         
+ 
+return (
+  <div className='bg-[#000] min-h-screen w-screen flex flex-col'>
+    <div className='bg-[#262626] w-full flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0'>
+      <div className='flex items-center gap-2 sm:gap-3'>
+        <div className='bg-[#4ade80] p-2 rounded-md'>
+          <Sprout className='w-5 h-5 text-white' />
         </div>
-        <span className='text-sm text-gray-300'>{parsearFecha(date)}</span>
       </div>
-      <div className='bg-[#262626]  w-full flex items-center justify-between px-8 py-3 border-t'>
-        <div className='flex items-center gap-3'>
-         
-          <h1 className='text-xl font-bold text-white'>Invernadero Esp32</h1>
-        </div>
-        
-      </div>
-      
-      
-      <div className="p-6">
-        <div className="grid grid-cols-4 gap-4 w-full mb-4">
-          <div className="h-[340px]">
-            <LDRChart />
-          </div>
-          <div className="h-[340px]">
-            <TempeChart />
-          </div>
-          <div className="h-[340px]">
-            <HumedadChart />
-          </div>
-          <div className="h-[340px] bg-[#262626] rounded-lg shadow-lg p-6 flex flex-col">
-            <h3 className="text-xl font-bold text-white mb-6">Bomba de agua</h3>
-            <div className="flex-1 flex items-center justify-center">
-              <div className="bg-[#4a4a4a] rounded-full w-32 h-16 flex items-center px-2 cursor-pointer transition-all hover:bg-[#555555]">
-                <div className="bg-white rounded-full w-12 h-12 shadow-lg transition-all"></div>
-              </div>
-            </div>
-            <div className="text-center mt-4">
-              <p className="text-gray-400 text-lg font-semibold mb-2">OFF</p>
-              <p className="text-gray-500 text-xs leading-relaxed">Sugerencia: activa la bomba cuando la humedad del suelo sea menor a 35%</p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="w-full h-[400px]">
-          <SensorChart />
-        </div>
+      <span className='text-xs sm:text-sm text-gray-300'>{parsearFecha(date)}</span>
+    </div>
+    <div className='bg-[#262626] w-full flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-8 py-2 sm:py-3 border-t gap-2 sm:gap-0'>
+      <div className='flex items-center gap-2 sm:gap-3'>
+        <h1 className='text-base sm:text-xl font-bold text-white'>Invernadero Esp32</h1>
       </div>
     </div>
-  )
+    <div className="p-2 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full mb-3 sm:mb-4">
+        <div className="h-[220px] sm:h-[340px]">
+          <LDRChart />
+        </div>
+        <div className="h-[220px] sm:h-[340px]">
+          <TempeChart />
+        </div>
+        <div className="h-[220px] sm:h-[340px]">
+          <HumedadChart />
+        </div>
+        <div className="h-[220px] sm:h-[340px] bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 flex flex-col">
+          <h3 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-6">Bomba de agua</h3>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="bg-[#4a4a4a] rounded-full w-20 h-10 sm:w-32 sm:h-16 flex items-center px-2 cursor-pointer transition-all hover:bg-[#555555]">
+              <div className="bg-white rounded-full w-8 h-8 sm:w-12 sm:h-12 shadow-lg transition-all"></div>
+            </div>
+          </div>
+          <div className="text-center mt-2 sm:mt-4">
+            <p className="text-gray-400 text-sm sm:text-lg font-semibold mb-1 sm:mb-2">OFF</p>
+            <p className="text-gray-500 text-xs leading-relaxed">Sugerencia: activa la bomba cuando la humedad del suelo sea menor a 35%</p>
+          </div>
+        </div>
+      </div>
+      <div className="w-full h-[180px] sm:h-[400px]">
+        <SensorChart />
+      </div>
+    </div>
+  </div>
+)
 }
-
 export default App
