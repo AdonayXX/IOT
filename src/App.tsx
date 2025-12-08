@@ -59,7 +59,7 @@ return (
           <h3 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-6">Bomba de agua</h3>
           <div className="flex-1 flex items-center justify-center">
             <div
-              className={`bg-[#4a4a4a] rounded-full w-20 h-10 sm:w-32 sm:h-16 flex items-center px-2 cursor-pointer transition-all hover:bg-[#555555] ${pumpOn ? 'justify-end' : 'justify-start'}`}
+              className={`${pumpOn ? 'bg-[#256F40]' : 'bg-[#4a4a4a]'}  rounded-full w-20 h-10 sm:w-32 sm:h-16 flex items-center px-2 cursor-pointer transition-all hover:bg-[#555555] ${pumpOn ? 'justify-end' : 'justify-start'}`}
               onClick={() => setPump(pumpOn ? "apagar" : "encender")}
               aria-disabled={pumpLoading}
               style={{ opacity: pumpLoading ? 0.6 : 1 }}

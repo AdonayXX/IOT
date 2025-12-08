@@ -15,8 +15,8 @@ export function LDRChart() {
         <RadialBarChart
           data={[{ porcentajeLuz }]}
           startAngle={90}
-          endAngle={-270}
-          innerRadius={75}
+          endAngle={450} // 360 grados desde 90
+          innerRadius={60}
           outerRadius={90}
           width={180}
           height={180}
