@@ -1,7 +1,7 @@
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { useLatestIotData } from "../hooks/useLatestIotData"
-import {  useSpring, useTransform } from "framer-motion"
-import { useEffect } from "react"
+import { useSpring } from "framer-motion"
+import { useEffect, useState } from "react"
 
 const MAX_LUX = 1000 // Ajusta este valor según el máximo real de tu sensor
 
@@ -12,12 +12,26 @@ export function LDRChart() {
 
   const springPorcentaje = useSpring(0, { stiffness: 100, damping: 30 })
   const springLux = useSpring(0, { stiffness: 100, damping: 30 })
-  const displayPorcentaje = useTransform(springPorcentaje, (current) => current.toFixed(1))
-  const displayLux = useTransform(springLux, (current) => Math.round(current))
+  
+  const [displayPorcentaje, setDisplayPorcentaje] = useState("0.0")
+  const [displayLux, setDisplayLux] = useState("0")
 
   useEffect(() => {
     springPorcentaje.set(porcentajeLuz)
     springLux.set(nivelLuz)
+
+    const unsubscribePorcentaje = springPorcentaje.on("change", (v) => {
+      setDisplayPorcentaje(v.toFixed(1))
+    })
+    
+    const unsubscribeLux = springLux.on("change", (v) => {
+      setDisplayLux(Math.round(v).toString())
+    })
+
+    return () => {
+      unsubscribePorcentaje()
+      unsubscribeLux()
+    }
   }, [porcentajeLuz, nivelLuz, springPorcentaje, springLux])
 
   // Calcula el ángulo final basado en el porcentaje
@@ -74,14 +88,14 @@ export function LDRChart() {
                         y={(viewBox.cy || 0) - 8}
                         className="fill-white text-3xl font-bold"
                       >
-                        {loading ? "--" : displayPorcentaje + "%"}
+                        {loading ? "--" : `${displayPorcentaje}%`}
                       </tspan>
                       <tspan
                         x={viewBox.cx}
                         y={(viewBox.cy || 0) + 18}
                         className="fill-gray-400 text-xs"
                       >
-                        {loading ? "--" : displayLux + " Lux"}
+                        {loading ? "--" : `${displayLux} Lux`}
                       </tspan>
                     </text>
                   )
