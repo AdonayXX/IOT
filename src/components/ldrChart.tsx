@@ -1,5 +1,7 @@
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { useLatestIotData } from "../hooks/useLatestIotData"
+import { motion, useSpring, useTransform } from "framer-motion"
+import { useEffect } from "react"
 
 const MAX_LUX = 1000 // Ajusta este valor según el máximo real de tu sensor
 
@@ -7,6 +9,16 @@ export function LDRChart() {
   const { data, loading, error } = useLatestIotData()
   const nivelLuz = data?.lightRaw ?? 0
   const porcentajeLuz = Math.max(0, Math.min((nivelLuz / MAX_LUX) * 100, 100)) // 0-100%
+
+  const springPorcentaje = useSpring(0, { stiffness: 100, damping: 30 })
+  const springLux = useSpring(0, { stiffness: 100, damping: 30 })
+  const displayPorcentaje = useTransform(springPorcentaje, (current) => current.toFixed(1))
+  const displayLux = useTransform(springLux, (current) => Math.round(current))
+
+  useEffect(() => {
+    springPorcentaje.set(porcentajeLuz)
+    springLux.set(nivelLuz)
+  }, [porcentajeLuz, nivelLuz, springPorcentaje, springLux])
 
   // Calcula el ángulo final basado en el porcentaje
   const startAngle = 90
@@ -22,8 +34,8 @@ export function LDRChart() {
           data={[{ porcentajeLuz }]}
           startAngle={startAngle}
           endAngle={endAngle}
-          innerRadius={60}
-          outerRadius={90}
+          innerRadius={70}
+          outerRadius={85}
           width={180}
           height={180}
         >
@@ -31,13 +43,15 @@ export function LDRChart() {
             gridType="circle"
             radialLines={false}
             stroke="none"
-            polarRadius={[85, 65]}
+            polarRadius={[85, 70]}
           />
           <RadialBar
             dataKey="porcentajeLuz"
-            background
-            cornerRadius={8}
+            background={{ fill: "#3a3a3a" }}
+            cornerRadius={10}
             fill="#4ade80"
+            isAnimationActive={true}
+            animationDuration={800}
           />
           <PolarRadiusAxis
             domain={[0, 100]}
@@ -60,14 +74,14 @@ export function LDRChart() {
                         y={(viewBox.cy || 0) - 8}
                         className="fill-white text-3xl font-bold"
                       >
-                        {loading ? "--" : porcentajeLuz.toFixed(1) + "%"}
+                        {loading ? "--" : displayPorcentaje + "%"}
                       </tspan>
                       <tspan
                         x={viewBox.cx}
                         y={(viewBox.cy || 0) + 18}
                         className="fill-gray-400 text-xs"
                       >
-                        {loading ? "--" : nivelLuz + " Lux"}
+                        {loading ? "--" : displayLux + " Lux"}
                       </tspan>
                     </text>
                   )
