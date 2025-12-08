@@ -1,7 +1,7 @@
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 
 const chartData = [
-  { sensor: "ldr", nivelLuz: 650, fill: "#4ade80" },
+  {  nivelLuz: 650 },
 ]
 
 export function LDRChart() {
