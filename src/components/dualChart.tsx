@@ -1,23 +1,21 @@
 import { CartesianGrid, Line, LineChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts"
-
-const chartData = Array.from({ length: 9 }, (_, i) => {
-  const hour = 12 + Math.floor(i / 4);
-  const minute = (i % 4) * 15;
-  const time = `${hour > 12 ? hour - 12 : hour}:${minute.toString().padStart(2, '0')}`;
-  return {
-    time,
-    temperatura: Math.floor(Math.random() * 70) + 15, // 15 - 85
-    humedad: Math.floor(Math.random() * 41) + 60      // 60 - 100
-  };
-});
+import { useHistoryData } from "../hooks/useHistoryData"
 
 export function SensorChart() {
+  const { data, loading, error } = useHistoryData("esp32-001", 1)
+
+
+  const chartData = data.map(d => ({
+    time: new Date(d.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    temperatura: d.tempC,
+    humedad: d.soilPct
+  })).reverse() 
+
   return (
     <div className="bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
       <div className="mb-3 sm:mb-6">
         <h3 className="text-base sm:text-xl font-bold text-white">Temperatura & Humedad</h3>
       </div>
-      
       <div className="h-[160px] sm:h-[calc(100%-70px)]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -36,7 +34,7 @@ export function SensorChart() {
               stroke="#9ca3af"
               style={{ fontSize: '12px' }}
               domain={[0, 100]}
-              ticks={[0, 20, 40, 60, 80]}
+              ticks={[0, 20, 40, 60, 80, 100]}
               tickLine={false}
               axisLine={{ stroke: '#3a3a3a' }}
             />
@@ -72,6 +70,8 @@ export function SensorChart() {
             />
           </LineChart>
         </ResponsiveContainer>
+        {loading && <p className="text-xs text-gray-400 mt-2">Cargando...</p>}
+        {error && <p className="text-xs text-red-400 mt-2">{error}</p>}
       </div>
     </div>
   )
