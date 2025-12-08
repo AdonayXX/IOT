@@ -10,7 +10,9 @@ export function usePump(deviceId = "esp32-001") {
     setLoading(true)
     setError(null)
     try {
-      await api.post(`/pump/${deviceId}/${accion}`)
+      // Invertir la acción: si en el front es "encender", mandar "apagar" y viceversa
+      const accionInvertida = accion === "encender" ? "apagar" : "encender"
+      await api.post(`/pump/${deviceId}/${accionInvertida}`)
       setPumpOn(accion === "encender")
     } catch {
       setError("Error al controlar la bomba")
