@@ -7,7 +7,7 @@ export interface HistoryIotData {
   createdAt: string
 }
 
-export function useHistoryData(deviceId = "esp32-001", hours = 24) {
+export function useHistoryData(deviceId = "esp32-001", hours = 1) {
   const [data, setData] = useState<HistoryIotData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
