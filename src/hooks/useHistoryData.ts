@@ -13,11 +13,22 @@ export function useHistoryData(deviceId = "esp32-001", hours = 1) {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setLoading(true)
-    api.get(`/history/${deviceId}?hours=${hours}`)
-      .then(res => setData(res.data))
-      .catch(() => setError("Error al obtener historial"))
-      .finally(() => setLoading(false))
+    let isMounted = true
+    const fetchData = () => {
+      setLoading(true)
+      api.get(`/history/${deviceId}?hours=${hours}`)
+        .then(res => isMounted && setData(res.data))
+        .catch(() => isMounted && setError("Error al obtener historial"))
+        .finally(() => isMounted && setLoading(false))
+    }
+
+    fetchData()
+    const interval = setInterval(fetchData, 5000)
+
+    return () => {
+      isMounted = false
+      clearInterval(interval)
+    }
   }, [deviceId, hours])
 
   return { data, loading, error }

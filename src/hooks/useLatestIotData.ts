@@ -14,11 +14,22 @@ export function useLatestIotData(deviceId = "esp32-001") {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setLoading(true)
-    api.get(`/latest/${deviceId}`)
-      .then(res => setData(res.data))
-      .catch(() => setError("Error al obtener datos"))
-      .finally(() => setLoading(false))
+    let isMounted = true
+    const fetchData = () => {
+      setLoading(true)
+      api.get(`/latest/${deviceId}`)
+        .then(res => isMounted && setData(res.data))
+        .catch(() => isMounted && setError("Error al obtener datos"))
+        .finally(() => isMounted && setLoading(false))
+    }
+
+    fetchData()
+    const interval = setInterval(fetchData, 5000)
+
+    return () => {
+      isMounted = false
+      clearInterval(interval)
+    }
   }, [deviceId])
 
   return { data, loading, error }

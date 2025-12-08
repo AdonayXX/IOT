@@ -1,10 +1,12 @@
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { useLatestIotData } from "../hooks/useLatestIotData"
 
+const MAX_LUX = 1000 // Ajusta este valor según el máximo real de tu sensor
+
 export function LDRChart() {
   const { data, loading, error } = useLatestIotData()
   const nivelLuz = data?.lightRaw ?? 0
-  const porcentajeLuz = Math.max(0, Math.min((nivelLuz / 1000) * 100, 100)) // Limita entre 0 y 100
+  const porcentajeLuz = Math.max(0, Math.min((nivelLuz / MAX_LUX) * 100, 100)) // 0-100%
 
   return (
     <div className="flex flex-col bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
@@ -72,14 +74,13 @@ export function LDRChart() {
         </RadialBarChart>
       </div>
       <div className="flex flex-1 flex-col items-center justify-center">
-      <p className="text-xs sm:text-sm text-gray-400">
+        <p className="text-xs sm:text-sm text-gray-400">
           {loading ? "Cargando..." : (data?.createdAt ? new Date(data.createdAt).toLocaleString() : "")}
         </p>
         {error && <p className="text-xs text-red-400">{error}</p>}
-        </div>
+      </div>
       <div className="pt-2 border-t border-gray-700">
         <p className="text-xs text-gray-500">Fuente: LDR analógica</p>
-       
       </div>
     </div>
   )
