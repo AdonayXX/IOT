@@ -24,7 +24,7 @@ export function useLatestIotData(deviceId = "esp32-001") {
     }
 
     fetchData()
-    const interval = setInterval(fetchData, 5000)
+    const interval = setInterval(fetchData, 10000)
 
     return () => {
       isMounted = false

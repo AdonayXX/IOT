@@ -8,6 +8,10 @@ export function LDRChart() {
   const nivelLuz = data?.lightRaw ?? 0
   const porcentajeLuz = Math.max(0, Math.min((nivelLuz / MAX_LUX) * 100, 100)) // 0-100%
 
+  // Calcula el ángulo final basado en el porcentaje
+  const startAngle = 90
+  const endAngle = startAngle + (360 * porcentajeLuz / 100)
+
   return (
     <div className="flex flex-col bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
       <div className="pb-2">
@@ -16,8 +20,8 @@ export function LDRChart() {
       <div className="flex-1 flex items-center justify-center">
         <RadialBarChart
           data={[{ porcentajeLuz }]}
-          startAngle={90}
-          endAngle={450} // 360 grados desde 90
+          startAngle={startAngle}
+          endAngle={endAngle}
           innerRadius={60}
           outerRadius={90}
           width={180}

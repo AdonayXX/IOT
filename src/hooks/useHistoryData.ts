@@ -23,7 +23,7 @@ export function useHistoryData(deviceId = "esp32-001", hours = 1) {
     }
 
     fetchData()
-    const interval = setInterval(fetchData, 5000)
+    const interval = setInterval(fetchData, 10000)
 
     return () => {
       isMounted = false

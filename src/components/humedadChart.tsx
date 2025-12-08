@@ -1,8 +1,18 @@
 import { Droplets } from "lucide-react"
 import { useLatestIotData } from "../hooks/useLatestIotData"
+import { motion, useSpring, useTransform } from "framer-motion"
+import { useEffect } from "react"
 
 export function HumedadChart() {
   const { data, loading, error } = useLatestIotData()
+  const humedad = data?.soilPct ?? 0
+  
+  const spring = useSpring(0, { stiffness: 100, damping: 30 })
+  const display = useTransform(spring, (current) => Math.round(current))
+
+  useEffect(() => {
+    spring.set(humedad)
+  }, [humedad, spring])
 
   return (
     <div className="flex flex-col bg-[#262626] rounded-lg shadow-lg p-3 sm:p-6 h-full">
@@ -13,9 +23,9 @@ export function HumedadChart() {
         <div className="text-center mb-3 sm:mb-6">
           <p className="text-xs sm:text-sm text-gray-400 mb-1 sm:mb-3">Último Valor:</p>
           <div className="flex items-baseline justify-center">
-            <span className="text-5xl sm:text-7xl font-bold text-[#4ade80]">
-              {loading ? "--" : (data?.soilPct ?? "--")}
-            </span>
+            <motion.span className="text-5xl sm:text-7xl font-bold text-[#4ade80]">
+              {loading ? "--" : display}
+            </motion.span>
             <span className="text-2xl sm:text-4xl text-[#4ade80] ml-2">%</span>
           </div>
         </div>
