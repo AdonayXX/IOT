@@ -1,6 +1,6 @@
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { useLatestIotData } from "../hooks/useLatestIotData"
-import { motion, useSpring, useTransform } from "framer-motion"
+import {  useSpring, useTransform } from "framer-motion"
 import { useEffect } from "react"
 
 const MAX_LUX = 1000 // Ajusta este valor según el máximo real de tu sensor
