@@ -6,7 +6,7 @@ export function usePump(deviceId = "esp32-001") {
   const [error, setError] = useState<string | null>(null)
   const [pumpOn, setPumpOn] = useState(false)
 
-  const setPump = async (accion: "encender" | "apagar") => {
+  const setPump = async (accion: "apagar" | "encender") => {
     setLoading(true)
     setError(null)
     try {
