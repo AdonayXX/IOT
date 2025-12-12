@@ -3,7 +3,7 @@ import { useLatestIotData } from "../hooks/useLatestIotData"
 import { useSpring } from "framer-motion"
 import { useEffect, useState } from "react"
 
-const MAX_LUX = 1000 // Ajusta este valor según el máximo real de tu sensor
+const MAX_LUX = 2000 // Ajusta este valor según el máximo real de tu sensor
 
 export function LDRChart() {
   const { data, loading, error } = useLatestIotData()
